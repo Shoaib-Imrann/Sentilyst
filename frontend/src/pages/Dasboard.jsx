@@ -244,7 +244,7 @@ export default function Dashboard() {
                 {/* Risk Assessment Card */}
                 <div className="bg-white rounded-xl shadow-sm h-[18.5rem]">
                   <div className="px-4 py-3 rounded-t-xl border-b border-gray-100">
-                  <h3 className="font-semibold text-lg text-gray-800">
+                  <h3 className="font-semibold text-lg text-gray-700">
                     Risk Assessment
                   </h3>
                   </div>
@@ -296,7 +296,7 @@ export default function Dashboard() {
                 {/* Source Distribution Card */}
                 <div className="bg-white rounded-xl shadow-sm">
                    <div className="px-4 py-3 rounded-t-xl border-b border-gray-100">
-                  <h3 className="text-lg font-semibold text-gray-800">
+                  <h3 className="text-lg font-semibold text-gray-700">
                     Source Distribution
                   </h3>
                   </div>
@@ -366,7 +366,7 @@ export default function Dashboard() {
                 <div className="bg-white rounded-xl shadow-sm">
                    <div className="px-4 py-3 rounded-t-xl border-b border-gray-100">
                   <div className="flex justify-between items-center">
-                    <h3 className="font-semibold text-lg text-gray-800">
+                    <h3 className="font-semibold text-lg text-gray-700">
                       Scraped Data
                     </h3>
                     <span className="bg-gray-100 text-gray-600 text-xs font-medium px-2 py-1 rounded-full">

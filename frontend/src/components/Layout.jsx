@@ -13,7 +13,7 @@ export default function Layout() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen pt-6">
       <Banner />
       
       <div className="flex flex-1 h-full">
@@ -27,7 +27,7 @@ export default function Layout() {
           mobileSidebarOpen={mobileSidebarOpen}
           setMobileSidebarOpen={setMobileSidebarOpen}
         />
-        <main className="flex-1 overflow-auto md:pt-0">
+        <main className="flex-1 overflow-auto">
           <Outlet />
         </main>
       </div>

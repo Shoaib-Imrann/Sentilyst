@@ -359,7 +359,7 @@ export default function Sidebar({
       {/* Desktop sidebar (unchanged) */}
       <div
         className={`
-          hidden md:flex flex-col h-screen justify-between transition-all duration-300
+          hidden md:flex flex-col h-full justify-between transition-all duration-300
           ${sidebarOpen ? "w-64" : "w-[49px]"}
           ${darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"}
           border-r ${darkMode ? "border-gray-700" : "border-gray-200"} shadow-sm
