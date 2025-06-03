@@ -111,10 +111,10 @@ export default function Sidebar({
           setActiveSection("dashboard"); // or whatever fallback you want
         }
       } else {
-        toast.error("Failed to delete this damn post");
+        toast.error("Failed to delete");
       }
     } catch (error) {
-      console.error("Delete error:", error);
+      // console.error("Delete error:", error);
       toast.error("Something wrong deleting");
     }
   };
@@ -229,7 +229,7 @@ export default function Sidebar({
 
           {/* Analyzed section header */}
           <div className="px-3 pt-5 pb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-            Your analysis
+            Your analyses
           </div>
 
           {/* Analyzed Items list */}
@@ -288,7 +288,7 @@ export default function Sidebar({
               </div>
             ) : (
               <div className="px-3 py-2 text-sm text-gray-500">
-                Sign in to view your analysis
+                Sign in to view your analyses
               </div>
             )}
           </div>
@@ -458,172 +458,181 @@ export default function Sidebar({
             {sidebarOpen && "M&A News"}
           </NavLink>
 
-          {/* Analyzed Data */}
-          <div
-            className={`${
-              !isLoggedIn
-                ? "opacity-50 pointer-events-none cursor-not-allowed"
-                : ""
-            }`}
-            title={!isLoggedIn ? "Sign in" : undefined} // tooltip on hover
-          >
-            <div
-              onClick={() => {
-                if (!isDisabled && isLoggedIn && sidebarOpen) {
-                  setAnalyzedDataOpen(!analyzedDataOpen);
-                }
-                // No action if sidebarOpen is false
-              }}
-              className={`
-      flex items-center rounded-md p-3 text-sm font-medium
-      ${
-        !isLoggedIn
-          ? "bg-gray-100 text-gray-400"
-          : activeSection.startsWith("analyzed")
-          ? darkMode
-            ? "bg-blue-600 text-white"
-            : "bg-blue-50 text-blue-700"
-          : darkMode
-          ? "text-gray-300 hover:bg-gray-700 hover:text-white"
-          : "text-gray-700 hover:bg-gray-100"
-      }
-      ${isDisabled ? "opacity-20 pointer-events-none cursor-not-allowed" : ""}
-      ${!sidebarOpen ? "cursor-default" : "cursor-pointer"}
-    `}
-            >
-              <Database
-                size={18}
-                className={sidebarOpen ? "mr-3" : "mx-auto"}
-              />
-              {sidebarOpen && (
-                <>
-                  <span className="flex-1">Analyzed</span>
-                  {analyzedDataOpen ? (
-                    <ChevronDown size={16} />
-                  ) : (
-                    <ChevronRight size={16} />
-                  )}
-                </>
-              )}
+          {/* Analyzed section header for desktop - only shown when not signed in */}
+          {sidebarOpen && !isLoggedIn && (
+            <div className="px-3 pt-5 pb-2 text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              Your analyses
             </div>
+          )}
+          
+          {/* Analyzed Data */}
+          <div>
+            {isLoggedIn ? (
+              <>
+                <div
+                  onClick={() => {
+                    if (!isDisabled && sidebarOpen) {
+                      setAnalyzedDataOpen(!analyzedDataOpen);
+                    }
+                  }}
+                  className={`
+                  flex items-center rounded-md p-3 text-sm font-medium
+                  ${
+                    activeSection.startsWith("analyzed")
+                      ? darkMode
+                        ? "bg-blue-600 text-white"
+                        : "bg-blue-50 text-blue-700"
+                      : darkMode
+                      ? "text-gray-300 hover:bg-gray-700 hover:text-white"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }
+                  ${isDisabled ? "opacity-20 pointer-events-none cursor-not-allowed" : ""}
+                  ${!sidebarOpen ? "cursor-default" : "cursor-pointer"}
+                `}
+                >
+                  <Database
+                    size={18}
+                    className={sidebarOpen ? "mr-3" : "mx-auto"}
+                  />
+                  {sidebarOpen && (
+                    <>
+                      <span className="flex-1">Analyzed</span>
+                      {analyzedDataOpen ? (
+                        <ChevronDown size={16} />
+                      ) : (
+                        <ChevronRight size={16} />
+                      )}
+                    </>
+                  )}
+                </div>
 
-            {sidebarOpen && analyzedDataOpen && isLoggedIn && (
-              <div className="ml-6 mt-1 space-y-1">
-                {analyzedTabs && analyzedTabs.length > 0 ? (
-                  analyzedTabs.map((tab) => {
-                    // get first 20 words
-                    const words = tab.query.split(" ");
-                    const excerpt =
-                      words.slice(0, 20).join(" ") +
-                      (words.length > 20 ? "..." : "");
+                {sidebarOpen && analyzedDataOpen && (
+                  <div className="ml-6 mt-1 space-y-1">
+                    {analyzedTabs && analyzedTabs.length > 0 ? (
+                      analyzedTabs.map((tab) => {
+                        // get first 20 words
+                        const words = tab.query.split(" ");
+                        const excerpt =
+                          words.slice(0, 20).join(" ") +
+                          (words.length > 20 ? "..." : "");
 
-                    return (
-                      <div
-                        key={tab.id}
-                        onMouseEnter={() => setHoveredTab(tab.id)}
-                        onMouseLeave={() => setHoveredTab(null)}
-                        onClick={() => handleAnalyzedItemClick(tab.id)}
-                        className={`
-                        flex items-center justify-between rounded-md p-3 text-sm cursor-pointer
-                        ${
-                          activeSection === `analyzed-${tab.id}`
-                            ? darkMode
-                              ? "bg-blue-500 text-white"
-                              : "bg-blue-50 text-blue-600"
-                            : darkMode
-                            ? "text-gray-300 hover:bg-gray-700 hover:text-white"
-                            : "text-gray-600 hover:bg-gray-100"
-                        }
-                      `}
-                      >
-                        {/* Excerpted text */}
-                        <span className="flex-1 text-xs font-medium truncate">
-                          {excerpt}
-                        </span>
+                        return (
+                          <div
+                            key={tab.id}
+                            onMouseEnter={() => setHoveredTab(tab.id)}
+                            onMouseLeave={() => setHoveredTab(null)}
+                            onClick={() => handleAnalyzedItemClick(tab.id)}
+                            className={`
+                            flex items-center justify-between rounded-md p-3 text-sm cursor-pointer
+                            ${
+                              activeSection === `analyzed-${tab.id}`
+                                ? darkMode
+                                  ? "bg-blue-500 text-white"
+                                  : "bg-blue-50 text-blue-600"
+                                : darkMode
+                                ? "text-gray-300 hover:bg-gray-700 hover:text-white"
+                                : "text-gray-600 hover:bg-gray-100"
+                            }
+                          `}
+                          >
+                            {/* Excerpted text */}
+                            <span className="flex-1 text-xs font-medium truncate">
+                              {excerpt}
+                            </span>
 
-                        {/* Trash icon on hover */}
-                        {hoveredTab === tab.id && (
-                          <Trash2
-                            size={14}
-                            className="ml-2 text-gray-400 hover:text-red-600"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteTab(tab.id);
-                            }}
-                          />
-                        )}
+                            {/* Trash icon on hover */}
+                            {hoveredTab === tab.id && (
+                              <Trash2
+                                size={14}
+                                className="ml-2 text-gray-400 hover:text-red-600"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDeleteTab(tab.id);
+                                }}
+                              />
+                            )}
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <div className="px-3 py-2 text-sm text-gray-600">
+                        No analyses yet
                       </div>
-                    );
-                  })
-                ) : (
-                  <div className="px-3 py-2 text-sm text-gray-600">
-                    No analyses yet
+                    )}
                   </div>
                 )}
+              </>
+            ) : (
+              <>
+              <div className={`flex items-center rounded-md p-3 text-sm ${sidebarOpen ? "" : "justify-center"}`}>
+                {sidebarOpen && (
+                  <span className="text-gray-500 text-sm">Sign in to view your analyses</span>
+                )}
               </div>
+              </>
             )}
           </div>
         </nav>
 
         {/* Profile Section */}
         <div className="relative px-1 py-2">
-          {/* Profile Button */}
-          <div
-            onClick={() => sidebarOpen && setProfileOpen(!profileOpen)}
-            className={`
-            flex items-center ${
-              sidebarOpen ? "justify-between px-3" : "justify-center"
-            } gap-3 py-2 rounded-md w-full
-            transition-all duration-200 cursor-pointer
-            ${profileOpen ? "bg-gray-300" : "hover:bg-gray-200"}
-          `}
-          >
-            {isLoggedIn && userData?.profileUrl ? (
-              <img 
-                src={userData.profileUrl} 
-                alt="Profile" 
-                className={`${
-                  sidebarOpen ? "w-8 h-8" : "w-7 h-7"
-                } rounded-full object-cover transition-all duration-300`}
-              />
-            ) : (
+          {/* When sidebar is closed or user is logged in, show profile button */}
+          {(!sidebarOpen || isLoggedIn) ? (
+            <>
               <div
+                onClick={() => sidebarOpen && setProfileOpen(!profileOpen)}
                 className={`
-                ${
-                  sidebarOpen ? "w-8 h-8" : "w-7 h-7"
-                } rounded-full bg-gray-800 text-white flex items-center justify-center font-medium
-                transition-all duration-300
+                flex items-center ${
+                  sidebarOpen ? "justify-between px-3" : "justify-center"
+                } gap-3 py-2 rounded-md w-full
+                transition-all duration-200 cursor-pointer
+                ${profileOpen ? "bg-gray-300" : "hover:bg-gray-200"}
               `}
               >
-                {isLoggedIn && userData?.fullName ? (
-                  userData.fullName.charAt(0).toUpperCase()
+                {isLoggedIn && userData?.profileUrl ? (
+                  <img 
+                    src={userData.profileUrl} 
+                    alt="Profile" 
+                    className={`${
+                      sidebarOpen ? "w-8 h-8" : "w-7 h-7"
+                    } rounded-full object-cover transition-all duration-300`}
+                  />
                 ) : (
-                  <User size={sidebarOpen ? 17 : 15} />
+                  <div
+                    className={`
+                    ${
+                      sidebarOpen ? "w-8 h-8" : "w-7 h-7"
+                    } rounded-full bg-gray-800 text-white flex items-center justify-center font-medium
+                    transition-all duration-300
+                  `}
+                  >
+                    {isLoggedIn && userData?.fullName ? (
+                      userData.fullName.charAt(0).toUpperCase()
+                    ) : (
+                      <User size={sidebarOpen ? 17 : 15} />
+                    )}
+                  </div>
+                )}
+
+                {sidebarOpen && (
+                  <div className="flex flex-1 justify-between items-center text-sm">
+                    {isLoggedIn && userData?.fullName
+                      ? userData.fullName
+                      : "Profile"}
+                    {profileOpen ? (
+                      <ChevronDown size={16} className="text-gray-500" />
+                    ) : (
+                      <ChevronRight size={16} className="text-gray-500" />
+                    )}
+                  </div>
                 )}
               </div>
-            )}
 
-            {sidebarOpen && (
-              <div className="flex flex-1 justify-between items-center text-sm">
-                {isLoggedIn && userData?.fullName
-                  ? userData.fullName
-                  : "Profile"}
-                {profileOpen ? (
-                  <ChevronDown size={16} className="text-gray-500" />
-                ) : (
-                  <ChevronRight size={16} className="text-gray-500" />
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Profile Popup */}
-          {profileOpen && sidebarOpen && (
-            <div className="absolute bottom-full left-2 right-2 mb-1 bg-white rounded-lg shadow-xl">
-              <div className="space-y-0.5">
-                {isLoggedIn ? (
-                  <>
-                    <div className="flex items-center space-x-3 px-4 pt-4 pb-3  rounded-t-lg">
+              {/* Profile Popup */}
+              {profileOpen && sidebarOpen && isLoggedIn && (
+                <div className="absolute bottom-full left-2 right-2 mb-1 bg-white rounded-lg shadow-xl">
+                  <div className="space-y-0.5">
+                    <div className="flex items-center space-x-3 px-4 pt-4 pb-3 rounded-t-lg">
                       {userData?.profileUrl ? (
                         <img 
                           src={userData.profileUrl} 
@@ -646,24 +655,23 @@ export default function Sidebar({
                     </div>
                     <button
                       onClick={handleSignOut}
-                      className="flex items-center justify-center gap-2 w-full p-3  hover:bg-gray-200 border-t border-gray-300 rounded-b-lg text-xs shadow-md"
+                      className="flex items-center justify-center gap-2 w-full p-3 hover:bg-gray-200 border-t border-gray-300 rounded-b-lg text-xs shadow-md"
                     >
                       <LogOut size={14} />
                       Sign Out
                     </button>
-                  </>
-                ) : (
-                  <div className="p-4 bg-white shadow-xl rounded-md ">
-                    <button
-                      onClick={() => navigate("/login")}
-                      className="w-full px-3 py-2 bg-gray-800 text-white hover:bg-gray-900 rounded-md text-sm cursor-pointer"
-                    >
-                      Sign In / Sign Up
-                    </button>
                   </div>
-                )}
-              </div>
-            </div>
+                </div>
+              )}
+            </>
+          ) : (
+            /* When sidebar is open and user is not logged in, show sign in button directly */
+            <button
+              onClick={() => navigate("/login")}
+              className="w-full px-3 py-2 bg-gray-800 text-white hover:bg-gray-900 rounded-md text-sm cursor-pointer"
+            >
+              Sign In / Sign Up
+            </button>
           )}
         </div>
       </div>

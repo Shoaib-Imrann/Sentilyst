@@ -83,7 +83,7 @@ export default function AnalyzedData() {
         toast.error("Failed to delete this post");
       }
     } catch (error) {
-      console.error("Delete error:", error);
+      // console.error("Delete error:", error);
       toast.error("Error while deleting");
     }
   };

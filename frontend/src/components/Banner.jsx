@@ -11,7 +11,7 @@ export default function Banner() {
   
   return (
     <div className="fixed top-0 w-full bg-blue-600 text-white text-xs py-1 px-4 text-center">
-      New response in ~4.5 mins (backend tier limit)
+      New analysis in ~4.5 mins (backend tier limit)
     </div>
   );
 }

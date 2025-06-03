@@ -119,7 +119,7 @@ export default function CalendarPage() {
         setEventsData(filtered);
         toast.success("Events loaded successfully");
       } catch (err) {
-        console.error("Failed to fetch events", err);
+        // console.error("Failed to fetch events", err);
         toast.error("Couldn't load events");
       }
     };
