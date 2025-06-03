@@ -82,7 +82,9 @@ export default function Sidebar({
   }, [activeSection]);
 
   const handleSignOut = () => {
-    localStorage.removeItem("accessToken"); // or however you're managing session
+    localStorage.removeItem("accessToken");
+    setSidebarOpen(false);
+    isDisabled && setProfileOpen(false);
     navigate("/");
     setIsLoggedIn(false);
   };
