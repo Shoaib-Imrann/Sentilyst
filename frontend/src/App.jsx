@@ -15,6 +15,7 @@ import About from "./pages/About";
 import TermsOfService from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 export default function App() {
   return (
@@ -47,6 +48,7 @@ export default function App() {
           </Routes>
         </Router>
         <Analytics />
+        <SpeedInsights />
       </>
   );
 }
