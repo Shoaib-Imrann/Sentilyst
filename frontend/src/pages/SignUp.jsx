@@ -237,7 +237,6 @@ const SignUp = () => {
         { token }
       );
       const data = res.data;
-      console.log("Logged in user:", data);
 
       localStorage.setItem("accessToken", data.token);
       toast.success("Logged in with Google");

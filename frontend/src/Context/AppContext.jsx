@@ -33,7 +33,6 @@ export const AppContextProvider = (props) => {
         setIsLoggedIn(false);
         return;
       }
-      // console.log("Token:", token)
 
       const response = await axios.get(backendUrl + "/api/email/is-auth", {
         headers: {

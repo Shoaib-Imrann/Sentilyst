@@ -54,7 +54,6 @@ export default function Dashboard() {
 
       if (res.status >= 200 && res.status < 300) {
         setAnalysisData(res.data);
-        console.log("Analysis data fetched successfully:", res.data);
         // Refresh the analyzed tabs list after successful analysis
         await fetchAnalyzedTabs();
       } else {
