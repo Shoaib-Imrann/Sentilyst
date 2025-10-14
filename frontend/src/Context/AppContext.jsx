@@ -1,5 +1,5 @@
 // src/Context/AppContext.jsx
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
@@ -20,10 +20,22 @@ export const AppContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [globalLoading, setGlobalLoading] = useState(true);
   const [userData, setUserData] = useState(null);
+  const [serverStatus, setServerStatus] = useState('checking'); // 'online', 'offline', 'checking'
 
   useEffect(() => {
     getAuthState();
-  }, []);
+    // Check server status immediately
+    checkServerStatus();
+  }, [backendUrl]);
+
+  const checkServerStatus = async () => {
+    try {
+      await axios.get(backendUrl, { timeout: 5000 });
+      setServerStatus('online');
+    } catch {
+      setServerStatus('offline');
+    }
+  };
 
   const getAuthState = async () => {
     try {
@@ -47,8 +59,7 @@ export const AppContextProvider = (props) => {
         localStorage.removeItem("accessToken");
         setIsLoggedIn(false);
       }
-    } catch (error) {
-      // console.log(error.message);
+    } catch {
       localStorage.removeItem("accessToken");
       setIsLoggedIn(false);
     } finally {
@@ -101,14 +112,18 @@ export const AppContextProvider = (props) => {
     if (analysisData) {
       try {
         localStorage.setItem("analysisData", JSON.stringify(analysisData));
-      } catch {}
+      } catch {
+        // Ignore localStorage errors
+      }
     }
   }, [analysisData]);
 
   useEffect(() => {
     try {
       localStorage.setItem("searchQuery", searchQuery);
-    } catch {}
+    } catch {
+      // Ignore localStorage errors
+    }
   }, [searchQuery]);
 
   const fetchAnalyzedTabs = async () => {
@@ -146,6 +161,8 @@ export const AppContextProvider = (props) => {
     analyzedTabs,
     setAnalyzedTabs,
     fetchAnalyzedTabs,
+    serverStatus,
+    checkServerStatus,
   };
 
   return (

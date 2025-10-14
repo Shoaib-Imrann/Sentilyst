@@ -27,6 +27,7 @@ import Banner from "../components/Banner";
 export default function AnalyzedData() {
   const [activeSection, setActiveSection] = useState("all");
   const [showTooltip, setShowTooltip] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const { slug } = useParams();
   const navigate = useNavigate();
