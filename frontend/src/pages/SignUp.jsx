@@ -6,6 +6,7 @@ import axios from "axios";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { TextField, InputAdornment, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Banner from "../components/Banner";
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
@@ -270,6 +271,7 @@ const SignUp = () => {
 
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <Banner />
       <div className="min-h-screen flex flex-col items-center justify-center bg-white">
         <div className="z-10 w-full max-w-md px-4 sm:px-0 flex flex-col justify-between min-h-screen py-5">
           <div className="mb-8 text-center">
