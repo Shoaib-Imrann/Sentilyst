@@ -1,5 +1,5 @@
 // src/pages/SentilystDashboard.jsx
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/Header";
@@ -71,27 +71,32 @@ export default function SentilystDashboard() {
   // Sample deals organized by category
   const dealsByCategory = {
     all: [
-      { text: "Disney and Jio Hotstar deal", category: "media" },
-      { text: "Apple's acquisition of WaveOne", category: "tech" },
-      { text: "Microsoft buying Activision", category: "tech" },
-      { text: "Elon Musk acquiring Twitter", category: "tech" },
-      { text: "Morgan Stanley buying E-Trade", category: "finance" },
-      { text: "Netflix acquiring Scanline VFX", category: "media" },
+      { text: "Adobe acquiring Figma", category: "tech" },
+      { text: "Microsoft buying Activision Blizzard", category: "tech" },
+      { text: "Broadcom acquiring VMware", category: "tech" },
+      { text: "JPMorgan Chase buying First Republic Bank", category: "finance" },
+      { text: "Amazon acquiring One Medical", category: "retail" },
+      { text: "Disney acquiring 21st Century Fox assets", category: "media" },
     ],
     tech: [
-      { text: "Apple's acquisition of WaveOne", category: "tech" },
-      { text: "Microsoft buying Activision", category: "tech" },
-      { text: "Google's acquisition of Fitbit", category: "tech" },
+      { text: "Adobe acquiring Figma", category: "tech" },
+      { text: "Microsoft buying Activision Blizzard", category: "tech" },
+      { text: "Broadcom acquiring VMware", category: "tech" },
     ],
     finance: [
-      { text: "Square acquiring Afterpay", category: "finance" },
-      { text: "Morgan Stanley buying E-Trade", category: "finance" },
-      { text: "Visa's acquisition of Plaid", category: "finance" },
+      { text: "JPMorgan Chase buying First Republic Bank", category: "finance" },
+      { text: "Wells Fargo acquiring Wachovia", category: "finance" },
+      { text: "Bank of America buying Merrill Lynch", category: "finance" },
     ],
     media: [
-      { text: "Disney and Jio Hotstar deal", category: "media" },
-      { text: "Amazon's acquisition of MGM", category: "media" },
-      { text: "Netflix acquiring Scanline VFX", category: "media" },
+      { text: "Disney acquiring 21st Century Fox assets", category: "media" },
+      { text: "Warner Bros merging with Discovery", category: "media" },
+      { text: "Paramount Global merger talks", category: "media" },
+    ],
+    retail: [
+      { text: "Amazon acquiring One Medical", category: "retail" },
+      { text: "Walmart acquiring Flipkart", category: "retail" },
+      { text: "Target acquiring Shipt", category: "retail" },
     ],
   };
 
