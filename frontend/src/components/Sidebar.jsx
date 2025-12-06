@@ -34,6 +34,7 @@ export default function Sidebar({
   const navigate = useNavigate();
   const location = useLocation();
   const isDashboardOrHome = location.pathname === "/dashboard" || location.pathname === "/" || location.pathname.startsWith("/analyzed");
+  const hasBanner = isDashboardOrHome; // Banner is only shown on dashboard/home pages
   const {
     analyzedTabs,
     isLoggedIn,
@@ -131,7 +132,7 @@ export default function Sidebar({
       {/* Mobile hamburger button (only visible on mobile) */}
       <button
         onClick={() => setMobileSidebarOpen(true)}
-        className={`md:hidden fixed ${isDashboardOrHome ? "top-9" : "top-3"} left-3 z-40 p-2 rounded-md bg-transparent hover:bg-gray-100`}
+        className={`md:hidden fixed ${hasBanner ? "top-9" : "top-3"} left-3 z-50 p-2 rounded-md  hover:bg-gray-100 `}
       >
         <AlignLeft size={20} />
       </button>
@@ -668,12 +669,14 @@ export default function Sidebar({
             </>
           ) : (
             /* When sidebar is open and user is not logged in, show sign in button directly */
-            <button
-              onClick={() => navigate("/login")}
-              className="w-full px-3 py-2 bg-gray-800 text-white hover:bg-gray-900 rounded-md text-sm cursor-pointer"
-            >
-              Sign In / Sign Up
-            </button>
+            <div className="px-2">
+              <button
+                onClick={() => navigate("/login")}
+                className="w-full px-3 py-2 bg-gray-800 text-white hover:bg-gray-900 rounded-md text-sm cursor-pointer"
+              >
+                Sign In / Sign Up
+              </button>
+            </div>
           )}
         </div>
       </div>

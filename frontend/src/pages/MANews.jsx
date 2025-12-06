@@ -309,9 +309,9 @@ export default function MergerAcquisitionNews() {
   }));
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50">
+    <div className="flex min-h-screen bg-gray-50">
       <div className="flex-1 flex flex-col bg-gray-50">
-        <header className="md:hidden p-4 bg-white shadow-sm flex items-center justify-between">
+        <header className="md:hidden fixed top-0 left-0 right-0 z-40 p-4 bg-white shadow-sm flex items-center justify-between">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="text-gray-600 p-2 rounded-lg hover:bg-gray-100"
@@ -321,7 +321,7 @@ export default function MergerAcquisitionNews() {
           <Link to="/" className="text-xl ptserif font-semibold text-gray-800">Sentilyst</Link>
           <div className="w-8"></div> {/* Empty div for flex spacing */}
         </header>
-        <main className="flex-1 overflow-y-auto p-6 md:p-9 space-y-6">
+        <main className="flex-1 p-6 md:p-9 space-y-6 pt-20 md:p-9">
           <SearchBar
             placeholder="Search for M&A news, companies..."
             className="mb-8 mt-3 text-sm"
