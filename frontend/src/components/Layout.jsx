@@ -1,7 +1,7 @@
 // src/components/Layout.jsx
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Banner from "./Banner";
 import { AlignLeft } from "lucide-react";
 
@@ -11,9 +11,11 @@ export default function Layout() {
   const [profileOpen, setProfileOpen] = useState(false);
 
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const location = useLocation();
+  const isNewsPage = location.pathname === "/ma-news";
   
   return (
-    <div className="flex flex-col h-screen pt-6">
+    <div className={`flex flex-col h-screen ${isNewsPage ? "" : "pt-6"}`}>
       <Banner />
       
       <div className="flex flex-1 h-full">
