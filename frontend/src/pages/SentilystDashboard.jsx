@@ -19,7 +19,7 @@ import Banner from "../components/Banner";
 
 export default function SentilystDashboard() {
   const navigate = useNavigate();
-  const { setAnalysisData, searchQuery, setSearchQuery, analyzedTabs, fetchAnalyzedTabs } =
+  const { setAnalysisData, searchQuery, setSearchQuery, analyzedTabs, fetchAnalyzedTabs, serverStatus } =
     useContext(AppContext);
   const [newsData, setNewsData] = useState([]);
   const [loadingNews, setLoadingNews] = useState(true);
@@ -160,7 +160,7 @@ export default function SentilystDashboard() {
   return (
     <>
     <div className="flex flex-col min-h-screen bg-gray-50 relative justify-center">
-      <header className="fixed top-9 right-4 z-50">
+      <header className={`fixed ${serverStatus === 'offline' ? 'top-9' : 'top-4'} right-4 z-50`}>
         <button className="w-9 h-9 rounded-full flex items-center justify-center font-medium cursor-pointer hover:bg-gray-200">
           <Link to="/about"><CircleHelp className="text-gray-600" size={20} /></Link>
         </button>
