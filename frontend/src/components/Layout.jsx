@@ -1,21 +1,19 @@
 // src/components/Layout.jsx
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Sidebar from "./Sidebar";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Banner from "./Banner";
-import { AlignLeft } from "lucide-react";
+import { AppContext } from "../Context/AppContext";
 
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("dashboard");
   const [profileOpen, setProfileOpen] = useState(false);
-
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const location = useLocation();
-  const isNewsPage = location.pathname === "/ma-news";
+  const { serverStatus } = useContext(AppContext);
   
   return (
-    <div className={`flex flex-col h-screen ${isNewsPage ? "" : "pt-6"}`}>
+    <div className={`flex flex-col h-screen ${serverStatus === 'offline' ? 'pt-6' : ''}`}>
       <Banner />
       
       <div className="flex flex-1 h-full">
