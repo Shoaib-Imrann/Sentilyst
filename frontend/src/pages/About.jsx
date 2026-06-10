@@ -1,140 +1,82 @@
 import React from "react";
-import {
-  Globe,
-  ChevronRight,
-  ChartBar,
-  MessageCircle,
-  TrendingUp,
-} from "lucide-react";
+import { ChartBar, Newspaper, TrendingUp, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export default function SentilystPage() {
+export default function About() {
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white">
-        <header className="max-w-6xl mx-auto px-6 py-12 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Link to="/" className="text-2xl md:text-3xl font-semibold ptserif">
-              Sentilyst
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col">
+      {/* Header */}
+      <header className="shrink-0 relative z-10 border-b border-slate-200/50 bg-white px-6 py-4">
+        <div className="max-w-screen-2xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Link
+              to="/"
+              className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors"
+            >
+              <ArrowLeft size={14} strokeWidth={2.5} />
+              <span>Back</span>
             </Link>
+            <div className="h-4 w-px bg-slate-200 hidden sm:block" />
+            <div className="hidden sm:block">
+              <span className="ptserif text-sm font-bold text-slate-800">Sentilyst</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2 text-sm bg-blue-800 bg-opacity-40 px-3 py-1 rounded-full hover:bg-opacity-50 cursor-pointer transition-colors">
-            <Globe size={14} />
-            <span>English</span>
-          </div>
-        </header>
-      </section>
-
-      {/* Description Section */}
-      <section className="bg-gray-50 text-gray-800 py-16">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="">
-            {/* <h2 className="text-2xl md:text-3xl font-semibold mb-6">About Sentilyst</h2> */}
-            <p className="text-gray-600 leading-relaxed">
-              Sentilyst is an AI-powered sentiment analysis platform that
-              gathers data from sources such as Reddit and Google News to
-              evaluate public sentiment around mergers and acquisition (M&A)
-              deals. It interprets online discussions to understand how people
-              are responding to these transactions. Please note that this is an
-              early-stage concept of the search mechanism and may not yield
-              fully accurate results. Currently, it utilizes Reddit and Google
-              News.
-            </p>
+          
+          <div className="flex items-center gap-5 text-xs font-semibold text-slate-400">
+            <Link to="/news" className="hover:text-slate-900 transition-colors">News</Link>
+            <Link to="/about" className="hover:text-slate-900 transition-colors text-slate-900 font-bold">About</Link>
           </div>
         </div>
-      </section>
+      </header>
 
-      {/* Features Section */}
-      <section className="bg-white text-gray-800 py-16">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="mb-16 text-center">
-            <h3 className="text-blue-800 font-semibold mb-2">HOW IT WORKS</h3>
-            <h2 className="text-2xl md:text-3xl font-bold">
-              AI-powered sentiment analysis
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 p-6 rounded-xl shadow-sm  transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-800 mb-4">
-                <MessageCircle size={24} />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Data Collection</h3>
-              <p className="text-gray-600 text-sm">
-                Gathers discussions and news from Reddit and Google News.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-xl shadow-sm  transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-800 mb-4">
-                <ChartBar size={24} />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Sentiment Analysis</h3>
-              <p className="text-gray-600 text-sm">
-                Interprets online discussions to understand public sentiment
-                around M&A deals.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-xl shadow-sm  transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-800 mb-4">
-                <TrendingUp size={24} />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Risk Assessment</h3>
-              <p className="text-gray-600 text-sm">
-                Evaluates potential risks and opportunities based on public
-                perception.
-              </p>
-            </div>
-          </div>
+      {/* Main Content */}
+      <div className="flex-1 max-w-3xl w-full mx-auto px-6 py-12 flex flex-col gap-6">
+        <div>
+          <h1 className="text-3xl ptserif text-slate-800 tracking-tight mt-0.5">Sentilyst</h1>
         </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start gap-6">
-            <div className="flex flex-col justify-center items-center md:items-start w-full">
-              <div className="flex items-center gap-2 mb-4">
-                {/* <FileText size={20} /> */}
-                <h3 className="text-xl font-semibold ptserif">Sentilyst</h3>
+        <p className="text-slate-600 leading-relaxed text-base sm:text-lg">
+          A sentiment analysis tool that searches M&A-related news, classifies headline sentiment with a pre-trained DistilBERT model, and visualizes the overall tone.
+        </p>
+
+        <div className="h-px bg-slate-200/60 my-4" />
+
+        <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+          How it works
+        </h2>
+        <div className="space-y-4">
+          {[
+            {
+              icon: Newspaper,
+              title: "News collection",
+              text: "Fetches M&A-related headlines from Google News and NewsAPI for your search query.",
+            },
+            {
+              icon: ChartBar,
+              title: "Sentiment analysis",
+              text: "Classifies each headline as positive or negative with a pre-trained DistilBERT model.",
+            },
+            {
+              icon: TrendingUp,
+              title: "Visualization",
+              text: "Shows a consolidated sentiment split breakdown and lists all the matching headlines with link sources.",
+            },
+          ].map(({ icon: Icon, title, text }) => (
+            <div
+              key={title}
+              className="flex gap-4 p-5 bg-white border border-slate-200/80 rounded-2xl"
+            >
+              <div className="w-10 h-10 shrink-0 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-500">
+                <Icon size={18} />
               </div>
-              <p className="text-gray-400 text-sm">
-                AI-powered sentiment analysis for M&A intelligence
-              </p>
+              <div>
+                <h3 className="font-bold text-slate-900 text-base mb-1">{title}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{text}</p>
+              </div>
             </div>
-            <div className="flex flex-col md:flex-row gap-8 w-full md:justify-end">
-              <ul className="space-y-2 flex flex-col items-center w-full md:w-fit md:items-start justify-center ">
-                <li>
-                  <a
-                    href="/about"
-                    className="text-white hover:text-blue-300 text-sm transition-colors"
-                  >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/terms"
-                    className="text-gray-400 hover:text-blue-300 text-sm transition-colors"
-                  >
-                    Terms of Service
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/privacy"
-                    className="text-gray-400 hover:text-blue-300 text-sm transition-colors"
-                  >
-                    Privacy Policy
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+          ))}
         </div>
-      </footer>
+      </div>
     </div>
   );
 }

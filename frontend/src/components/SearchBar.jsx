@@ -1,6 +1,6 @@
 // src/components/SearchBar.jsx
 import React, { useState } from "react";
-import { ArrowRight, CircleHelp } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function SearchBar({
   searchQuery,
